@@ -19,10 +19,12 @@ if __name__ == "__main__":
         1. a short summary
         2. two interesting facts about them
         """
-    
-    summary_prompt_template = PromptTemplate(input_variables=["information"], template=summary_template)
 
-    llm = Ollama(temperature=0, model="dolphin-llama3", base_url="http://aibox:11434")
+    summary_prompt_template = PromptTemplate(
+        input_variables=["information"], template=summary_template
+    )
+
+    llm = Ollama(temperature=0, model="phi3:instruct", base_url="http://aibox:11434")
 
     chain = summary_prompt_template | llm
 
