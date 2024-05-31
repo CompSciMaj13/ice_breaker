@@ -1,3 +1,13 @@
+"""
+This module contains the `lookup` function, which uses OpenAI's GPT-3.5-turbo
+model to find the LinkedIn profile URL of a given person. The function takes a
+full name as input and returns the corresponding LinkedIn profile URL.
+
+The `lookup` function utilizes various tools from LangChain, including the
+ChatOpenAI, and React Agent. It can be used for finding LinkedIn profile URLs of
+individuals or for other natural language processing tasks.
+"""
+
 import os
 
 from dotenv import load_dotenv
@@ -14,6 +24,14 @@ load_dotenv()
 
 
 def lookup(name: str) -> str:
+    """
+    Looks up a LinkedIn profile URL using OpenAI's GPT-3.5-turbo model.
+
+    :param name: The full name of the person whose LinkedIn profile URL is to be looked up.
+    :type name: str
+    :return: The URL of the LinkedIn profile page
+    :rtype: str
+    """
     # llm = Ollama(
     #    temperature=0.8,
     #    #model="llama3:instruct",
