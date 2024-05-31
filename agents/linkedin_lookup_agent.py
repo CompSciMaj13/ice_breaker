@@ -1,14 +1,12 @@
 import os
+
 from dotenv import load_dotenv
+from langchain import hub
+from langchain.agents import AgentExecutor, create_react_agent
 from langchain.prompts.prompt import PromptTemplate
-from langchain_openai import ChatOpenAI
 from langchain_community.llms import Ollama
 from langchain_core.tools import Tool
-from langchain.agents import (
-    create_react_agent,
-    AgentExecutor,
-)
-from langchain import hub
+from langchain_openai import ChatOpenAI
 
 from tools.tools import get_profile_urls_tavily
 
@@ -16,7 +14,7 @@ load_dotenv()
 
 
 def lookup(name: str) -> str:
-    #llm = Ollama(
+    # llm = Ollama(
     #    temperature=0.8,
     #    #model="llama3:instruct",
     #    #model="dolphin-llama3",
@@ -25,7 +23,7 @@ def lookup(name: str) -> str:
     #    #model="vanilj/llama-3-magenta-instruct-4x8b-moe",
     #    base_url="http://aibox:11434"
     #    )
-    
+
     # OpenAI
     llm = ChatOpenAI(
         temperature=0,
@@ -39,14 +37,13 @@ def lookup(name: str) -> str:
         """
 
     prompt_template = PromptTemplate(
-        input_variables=["name_of_person"],
-        template=template
-        )
+        input_variables=["name_of_person"], template=template
+    )
     tools_for_agent = [
         Tool(
             name="Crawl Google for LinkedIn Profile page",
             func=get_profile_urls_tavily,
-            description="Useful for when you need to find a LinkedIn profile page URL."
+            description="Useful for when you need to find a LinkedIn profile page URL.",
         )
     ]
 
@@ -63,14 +60,15 @@ def lookup(name: str) -> str:
         handle_parsing_errors=True,
         max_iterations=5,
         verbose=True,
-        )
+    )
 
     result = agent_executor.invoke(
-        input = {"input": prompt_template.format_prompt(name_of_person=name)}
-    ) 
+        input={"input": prompt_template.format_prompt(name_of_person=name)}
+    )
 
     linkedin_profile_url = result["output"]
     return linkedin_profile_url
+
 
 if __name__ == "__main__":
     # Test the function with a name of the instructor of the LangChain course, Eden Marco

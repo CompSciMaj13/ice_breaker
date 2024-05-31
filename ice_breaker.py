@@ -2,8 +2,9 @@ from dotenv import load_dotenv
 from langchain.prompts.prompt import PromptTemplate
 from langchain_community.llms import Ollama
 
-from third_parties.linkedin import scrape_linkedin_profile
 from agents.linkedin_lookup_agent import lookup as linkedin_lookup_agent
+from third_parties.linkedin import scrape_linkedin_profile
+
 
 def ice_break_with(name: str) -> str:
     linkedin_username = linkedin_lookup_agent(name=name)
@@ -25,6 +26,7 @@ def ice_break_with(name: str) -> str:
     res = chain.invoke(input={"information": linkedin_data})
 
     print(res)
+
 
 if __name__ == "__main__":
     load_dotenv()
