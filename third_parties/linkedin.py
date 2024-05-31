@@ -20,13 +20,14 @@ def scrape_linkedin_profile(linkedin_profile_url: str, mock: bool = False):
             api_endpoint,
             params={"url": linkedin_profile_url},
             headers=header_dict,
-            timeout=10,
+            timeout=60,
         )
 
     data = response.json()
     return data
 
 if __name__ == "__main__":
+    # Testing the function with a real LinkedIn profile URL and the mock parameter set to True (using a GitHub Gist).
     print(
         scrape_linkedin_profile(
             linkedin_profile_url="https://www.linkedin.com/in/eden-marco",

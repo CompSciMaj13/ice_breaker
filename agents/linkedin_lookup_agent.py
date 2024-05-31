@@ -73,5 +73,6 @@ def lookup(name: str) -> str:
     return linkedin_profile_url
 
 if __name__ == "__main__":
+    # Test the function with a name of the instructor of the LangChain course, Eden Marco
     linkedin_url = lookup(name="Eden Marco")
     print(linkedin_url)
