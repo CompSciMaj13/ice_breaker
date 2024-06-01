@@ -10,6 +10,7 @@ black = "*"
 langchain-community = "*"
 python-dotenv = "*"
 langchainhub = "*"
+flask = "*"
 
 [dev-packages]
 

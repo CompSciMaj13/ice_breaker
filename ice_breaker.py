@@ -7,16 +7,17 @@ A prompt template is used to create a summary and interesting facts based on thi
 :date: 2024-05-30
 """
 
+from typing import Tuple
 from dotenv import load_dotenv
 from langchain.prompts.prompt import PromptTemplate
 from langchain_community.llms import Ollama
 
 from agents.linkedin_lookup_agent import lookup as linkedin_lookup_agent
 from third_parties.linkedin import scrape_linkedin_profile
-from output_parsers import summary_parser
+from output_parsers import summary_parser, Summary
 
 
-def ice_break_with(name: str) -> str:
+def ice_break_with(name: str) -> Tuple[Summary, str]:
     """Generates a short summary and two interesting facts about a person based on their LinkedIn profile.
 
     :param name: The name of the person to generate information about (used to lookup their LinkedIn username)
@@ -43,9 +44,9 @@ def ice_break_with(name: str) -> str:
     llm = Ollama(temperature=0, model="llama3:instruct", base_url="http://aibox:11434")
 
     chain = summary_prompt_template | llm | summary_parser
-    res = chain.invoke(input={"information": linkedin_data})
+    res:Summary = chain.invoke(input={"information": linkedin_data})
 
-    print(res)
+    return res, linkedin_data.get("profile_pic_url")
 
 
 if __name__ == "__main__":

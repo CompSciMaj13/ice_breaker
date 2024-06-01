@@ -50,7 +50,7 @@ def lookup(name: str) -> str:
     template = """
         Given the full name {name_of_person}, I want you to find the URL to their LinkedIn profile page.
         The LinkedIn Profile URL will contain linkedin.com/in/
-        Your Answer should contain only one URL. Do not answer with multiple options.
+        Your Answer should contain only one URL. Do not answer with multiple options. Only return a URL.
         """
 
     prompt_template = PromptTemplate(
