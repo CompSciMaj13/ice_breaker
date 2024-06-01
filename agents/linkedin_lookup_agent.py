@@ -22,7 +22,6 @@ from tools.tools import get_profile_urls_tavily
 
 load_dotenv()
 
-
 def lookup(name: str) -> str:
     """
     Looks up a LinkedIn profile URL using OpenAI's GPT-3.5-turbo model.
@@ -50,7 +49,7 @@ def lookup(name: str) -> str:
 
     template = """
         Given the full name {name_of_person}, I want you to find the URL to their LinkedIn profile page.
-        The LinkedIn Profile URL will start with https://il.linkedin.com/in/
+        The LinkedIn Profile URL will contain linkedin.com/in/
         Your Answer should contain only one URL. Do not answer with multiple options.
         """
 
